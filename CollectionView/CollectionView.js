@@ -37,7 +37,7 @@ var CollectionView = Backbone.View.extend({
 
         var collection = this.collection;
         if (this.collectionFilter) {
-            collection = this.collection.filter(this.collectionFilter);
+            collection = _.(this.collection.filter(this.collectionFilter));
         }
 
         var self = this;
