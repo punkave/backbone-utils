@@ -1,14 +1,24 @@
 var CollectionItemView = Backbone.View.extend({
-    label:      "CollectionItemView",
-    template:   _.template(
-        "<ul>
-            <% _.each(item, function(value) { %>
-                <li><%= value %></li>
-            <% }) %>
-        </ul>"
-    ), 
+
+    log: function(text) {
+        console.log(this.label + " - " + text);
+    },
+
+    getDefaultTemplate: function() {
+        return _.template(
+                    "<ul>
+                        <% _.each(item, function(value) { %>
+                            <li><%= value %></li>
+                        <% }) %>
+                    </ul>"
+                );
+    },
 
     parseOptions: function(options) {
+        options = options || {};
+
+        this.label = options.label || "CollectionItemView";
+        this.template = options.template || this.getDefaultTemplate();
     },
 
     bindEvents: function(options) {
@@ -18,5 +28,10 @@ var CollectionItemView = Backbone.View.extend({
     render: function() {
         this.$el.html(this.template(this.model.serialize()));
         return this;
+    },
+
+    initialize: function(options) {
+        this.parseOptions(options);
+        this.bindEvents(options);
     }
 });

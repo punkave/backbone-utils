@@ -6,7 +6,12 @@ var CollectionView = Backbone.View.extend({
     },
 
     parseOptions: function(options) {
+        options = options || {};
+
+        this.label = options.label || "CollectionView";
         this.itemViewClass = options.itemViewClass || CollectionItemView;
+        this.itemOptions = options.itemOptions || {};
+
         return options;
     },
 
@@ -33,7 +38,7 @@ var CollectionView = Backbone.View.extend({
             var itemView = new self.itemViewClass({
                 model: item
             });
-            
+
             self.subViews.push(itemView);
             self.$el.append(itemView.render().$el);
         });
