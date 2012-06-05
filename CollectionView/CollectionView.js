@@ -35,13 +35,10 @@ var CollectionView = Backbone.View.extend({
     render: function() {
         this.reset();
 
-        var collection = this.collection;
-        if (this.collectionFilter) {
-            collection = _.(this.collection.filter(this.collectionFilter));
-        }
-
         var self = this;
-        collection.each(function(item) {
+        var collection = this.collection.filter(this.collectionFilter);
+
+        _.each(collection, function(item) {
             var itemView = new self.itemViewClass(_.extend(self.itemOptions, {
                 model: item
             }));
