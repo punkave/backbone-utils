@@ -5,7 +5,7 @@ var CollectionItemView = Backbone.View.extend({
     },
 
     getDefaultTemplate: function() {
-        return _.template("<ul><% _.each(item, function(value) { %><li><%= value %></li><% }) %></ul>");
+        return _.template("<ul><% _.each(data, function(value) { %><li><%= value %></li><% }) %></ul>");
     },
 
     parseOptions: function(options) {
@@ -20,7 +20,7 @@ var CollectionItemView = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.html(this.template(this.model.serialize()));
+        this.$el.html(this.template(this.model.serialize()), { hasWith: 'no' }, { variable: 'data' });
         return this;
     },
 
