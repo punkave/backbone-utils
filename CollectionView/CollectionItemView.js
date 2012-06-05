@@ -5,13 +5,7 @@ var CollectionItemView = Backbone.View.extend({
     },
 
     getDefaultTemplate: function() {
-        return _.template(
-                    "<ul>
-                        <% _.each(item, function(value) { %>
-                            <li><%= value %></li>
-                        <% }) %>
-                    </ul>"
-                );
+        return _.template("<ul><% _.each(item, function(value) { %><li><%= value %></li><% }) %></ul>");
     },
 
     parseOptions: function(options) {
