@@ -5,11 +5,17 @@ var CollectionView = Backbone.View.extend({
         console.log(this.label + " - " + text);
     },
 
+    getDefaultFilter: function() {
+        return function(item) {
+            return true;
+        };
+    },
+
     parseOptions: function(options) {
         options = options || {};
 
         this.label = options.label || "CollectionView";
-        this.collectionFilter = options.collectionFilter || null;
+        this.collectionFilter = options.collectionFilter || this.getDefaultFilter();
 
         this.itemViewClass = options.itemViewClass || CollectionItemView;
         this.itemOptions = options.itemOptions || {};
