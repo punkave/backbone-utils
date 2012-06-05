@@ -35,9 +35,9 @@ var CollectionView = Backbone.View.extend({
 
         var self = this;
         this.collection.each(function(item) {
-            var itemView = new self.itemViewClass({
+            var itemView = new self.itemViewClass(_.extend(self.itemOptions, {
                 model: item
-            });
+            }));
 
             self.subViews.push(itemView);
             self.$el.append(itemView.render().$el);
