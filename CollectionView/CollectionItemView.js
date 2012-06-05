@@ -20,7 +20,7 @@ var CollectionItemView = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.html(this.template(this.model.serialize()), { hasWith: 'no' }, { variable: 'data' });
+        this.$el.html(this.template({ data: this.model.serialize() }));
         return this;
     },
 
