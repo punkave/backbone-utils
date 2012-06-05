@@ -9,6 +9,8 @@ var CollectionView = Backbone.View.extend({
         options = options || {};
 
         this.label = options.label || "CollectionView";
+        this.collectionFilter = options.collectionFilter || null;
+
         this.itemViewClass = options.itemViewClass || CollectionItemView;
         this.itemOptions = options.itemOptions || {};
 
@@ -33,8 +35,13 @@ var CollectionView = Backbone.View.extend({
     render: function() {
         this.reset();
 
+        var collection = this.collection;
+        if (this.collectionFilter) {
+            collection = this.collection.filter(this.collectionFilter);
+        }
+
         var self = this;
-        this.collection.each(function(item) {
+        collection.each(function(item) {
             var itemView = new self.itemViewClass(_.extend(self.itemOptions, {
                 model: item
             }));
