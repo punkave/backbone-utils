@@ -25,7 +25,12 @@ var CollectionSelectView = CollectionView.extend({
         CollectionView.prototype.render.call(this);
 
         if (this.addEmpty) {
-            this.collection.add([{ selected: true }], { at: 0 });
+            var idAttribute = this.collection.model.idAttribute;
+            var attrs = {
+                selected: true
+            };
+            attrs[idAttribute] = "";
+            this.collection.add([attrs], { at: 0 });
         }
 
         return this;
