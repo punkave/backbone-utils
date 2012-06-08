@@ -1,7 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title>Jasmine Test Runner</title>
-    <link rel="stylesheet" type="text/css" href="jasmine-standalone-1.0.0/lib/jasmine-1.0.0/jasmine.css">
+    <title>CollectionView</title>
+    <link rel="stylesheet" type="text/css" href="../src/bootstrap/css/bootstrap.css">
 
     <!-- Backbone 'n Underscore -->
     <script type="text/javascript" src="../src/jquery-1.7.2.min.js"></script>
@@ -15,49 +16,56 @@
 
   </head>
   <body>
+    <div class="container">
 
-    <div data-add-items>
-      <h4>Add an item to the collection:</h4>
-      <span>Index: <input type="text" data-index /></span>
-      <span>Name: <input type="text" data-name /></span>
-      <a href="#" data-add-btn>Add item</a>
-    </div>
+      <div data-add-items>
+        <h4>Add an item to the collection:</h4>
+        <form class="well" data-add-form>
+          <label>Index</label>
+          <input type="text" data-index /> Leave blank to append
+          <label>Name</label>
+          <input type="text" data-name />
+          <br />
+          <button type="submit" class="btn btn-primary">Add item</button>
+        </form>
+      </div>
 
-    <div data-collection-view></div>
+      <div data-collection-view></div>
 
-    <script type="text/javascript">
-      var collection = new Backbone.Collection();
-      var collectionList = new CollectionView({
-        collection: collection,
-        el: $('[data-collection-view]')
-      });
+      <script type="text/javascript">
+        var collection = new Backbone.Collection();
+        var collectionList = new CollectionView({
+          collection: collection,
+          el: $('[data-collection-view]')
+        });
 
-      var DemoView = Backbone.View.extend({
-        events: {
-          "click [data-add-btn]":   "addItem"
-        },
+        var DemoView = Backbone.View.extend({
+          events: {
+            "submit [data-add-form]":   "addItem"
+          },
 
-        addItem: function(event) {
-          var name = this.$('[data-name]').val();
-          var index = this.$('[data-index]').val();
+          addItem: function(event) {
+            var name = this.$('[data-name]').val();
+            var index = this.$('[data-index]').val();
 
-          var item = new Backbone.Model({ name: name });
-          var opts = {};
-          if (index) {
-            opts.at = index;
+            var item = new Backbone.Model({ name: name });
+            var opts = {};
+            if (index) {
+              opts.at = index;
+            }
+
+            collection.add(item, opts);
+
+            return false;
           }
+        });
 
-          collection.add(item, opts);
-
-          return false;
-        }
-      });
-
-      var demo = new DemoView({
-        el: $('[data-add-items]')
-      });
-    </script>
+        var demo = new DemoView({
+          el: $('[data-add-items]')
+        });
+      </script>
 
 
+    </div>
   </body>
 </html>
