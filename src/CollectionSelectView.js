@@ -21,7 +21,7 @@ var CollectionSelectView = CollectionView.extend({
         CollectionView.prototype.render.call(this);
 
         if (this.addEmpty) {
-            this.collection.add([{}], { at: 0 });
+            this.collection.add([{ selected: true }], { at: 0 });
         }
 
         return this;
