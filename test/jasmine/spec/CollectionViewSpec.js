@@ -15,6 +15,8 @@ describe("CollectionView", function() {
                 template: _.template("<%= data.name %>")
             }
         });
+
+        collectionView.render();
     });
 
     it("should render collections", function() {
@@ -28,15 +30,14 @@ describe("CollectionView", function() {
         expect(view.$el.html()).toBe("New Model");
     });
 
-    it("should empty itself and clear all subviews when reset", function() {
-        collectionView.reset();
-        expect(collectionView.$el.html()).toBe("");
+    it("should call add when adding items to the collection", function() {
+        collection.add(new Backbone.Model({ name: "new super model " }));
+        expect(collectionView.subViews.length == collection.length).toBe(true);
     });
 
-    it("should call add when adding items to the collection", function() {
-        spyOn(collectionView, "add");
-        collection.add(new Backbone.Model({ name: "new super model " }));
-        expect(collectionView.add).toHaveBeenCalled();
+    it("should call remove when removing items remove the collection", function() {
+        var model = collection.pop();
+        expect(collectionView.subViews.length == collection.length).toBe(true);
     });
 
     it("should render when the collection is reset", function() {
