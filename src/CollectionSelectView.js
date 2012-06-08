@@ -1,6 +1,10 @@
 var CollectionSelectView = CollectionView.extend({
     tagName: 'select',
 
+    events: {
+        "change select":    "callChangeFunction"
+    },
+
     parseOptions: function(options) {
         // call super class
         CollectionView.prototype.parseOptions.call(this, options);
@@ -25,5 +29,9 @@ var CollectionSelectView = CollectionView.extend({
         }
 
         return this;
+    },
+
+    callChangeFunction: function(event) {
+        this.changeFunction(this.getValue());
     }
 });
