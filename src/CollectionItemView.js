@@ -1,4 +1,9 @@
 var CollectionItemView = Backbone.View.extend({
+    initialize: function(options) {
+        this.parseOptions(options);
+        this.bindEvents(options);
+    },
+
     log: function(text) {
         console.log(this.label + " - " + text);
     },
@@ -26,10 +31,5 @@ var CollectionItemView = Backbone.View.extend({
     render: function() {
         this.$el.html(this.template({ data: this.model.toJSON() }));
         return this;
-    },
-
-    initialize: function(options) {
-        this.parseOptions(options);
-        this.bindEvents(options);
     }
 });
