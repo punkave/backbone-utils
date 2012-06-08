@@ -2,7 +2,7 @@ var CollectionSelectView = CollectionView.extend({
     tagName: 'select',
 
     events: {
-        "change select":    "callChangeFunction"
+        "change":    "callChangeFunction"
     },
 
     parseOptions: function(options) {
