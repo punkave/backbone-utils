@@ -49,7 +49,7 @@ var CollectionView = Backbone.View.extend({
         }, this);
 
         this.collection.bind("reset", function() {
-            this.render()
+            this.addAll(this.collection, {});
         }, this);
     },
 
@@ -68,15 +68,29 @@ var CollectionView = Backbone.View.extend({
     add: function(item, collection, options) {
         var index = options.index;
         var view = this.createSubView(item);
-        view.render();
 
         if (options.index < this.subViews.length) {
-            this.subViews[options.index].$el.before(view.$el);
+            if (this.collectionFilter(item)) {
+                this.subViews[options.index].$el.before(view.render().$el);
+            }
             this.subViews.splice(options.index, 0, view);
         } else {
-            this.$el.append(view.$el);
+            if (this.collectionFilter(item)) {
+                this.$el.append(view.render().$el);
+            }
             this.subViews.push(view);
         }
+    },
+
+    // This creates all of the subviews for the collection. This will get called 
+    // on collection reset. This function will render the views.
+    addAll: function(collection, options) {
+        this.subViews = [];
+
+        var self = this;
+        collection.each(function(item, index) {
+            self.add(item, collection, { index: index });
+        });
     },
 
     // When a model is simply removed from the collection, we only want to remove one
@@ -93,14 +107,10 @@ var CollectionView = Backbone.View.extend({
     // subViews array. Garbage collection will then free that stuff from memory
     render: function() {
         this.$el.empty();
-        this.subViews = [];
 
         var self = this;
         this.collection.chain().filter(this.collectionFilter).each(function(item, index) {
-            var view = this.createSubView(item);
-
-            self.subViews[index] = view;
-            self.$el.append(view.render().$el);
+            self.$el.append(self.subViews[index].$el);
         }, this);
 
         return this;

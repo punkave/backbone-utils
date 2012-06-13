@@ -1,4 +1,4 @@
-describe("CollectionView", function() {
+describe("CollectionSelectView", function() {
     var TestCollection = Backbone.Collection.extend({
         model: Backbone.Model
     });
@@ -6,13 +6,7 @@ describe("CollectionView", function() {
     var collectionView;
 
     beforeEach(function() {
-        collection = new TestCollection([
-            { 
-                id:         "truth",
-                name:       "Test item 1",
-                selected:   "1"
-            }
-        ]);
+        collection = new TestCollection();
         collectionView = new CollectionSelectView({
             collection: collection,
             itemOptions: {
@@ -20,7 +14,13 @@ describe("CollectionView", function() {
             }
         });
 
-        collectionView.render();
+        collection.reset([
+            { 
+                id:         "truth",
+                name:       "Test item 1",
+                selected:   "1"
+            }
+        ]);
     });
 
     it("should render collections", function() {
@@ -45,9 +45,9 @@ describe("CollectionView", function() {
     });
 
     it("should render when the collection is reset", function() {
-        spyOn(collectionView, "render");
+        spyOn(collectionView, "addAll");
         collection.reset();
-        expect(collectionView.render).toHaveBeenCalled();
+        expect(collectionView.addAll).toHaveBeenCalled();
     });
 
     it("should report the currently selected value", function() {

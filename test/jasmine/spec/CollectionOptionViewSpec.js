@@ -1,4 +1,4 @@
-describe("CollectionItemView", function() {
+describe("CollectionOptionView", function() {
     var testItem;
     var itemView;
 

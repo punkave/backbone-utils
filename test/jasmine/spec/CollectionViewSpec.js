@@ -6,17 +6,14 @@ describe("CollectionView", function() {
     var collectionView;
 
     beforeEach(function() {
-        collection = new TestCollection([
-            { name: "Test item 1" }
-        ]);
+        collection = new TestCollection();
         collectionView = new CollectionView({
             collection: collection,
             itemOptions: {
                 template: _.template("<%= data.name %>")
             }
         });
-
-        collectionView.render();
+        collection.reset([{ name: "Test item 1" }]);
     });
 
     it("should render collections", function() {
@@ -40,9 +37,9 @@ describe("CollectionView", function() {
         expect(collectionView.subViews.length == collection.length).toBe(true);
     });
 
-    it("should render when the collection is reset", function() {
-        spyOn(collectionView, "render");
+    it("should addAll and render when the collection is reset", function() {
+        spyOn(collectionView, "addAll");
         collection.reset();
-        expect(collectionView.render).toHaveBeenCalled();
+        expect(collectionView.addAll).toHaveBeenCalled();
     });
 });
