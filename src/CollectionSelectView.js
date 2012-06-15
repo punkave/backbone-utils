@@ -39,6 +39,11 @@ var CollectionSelectView = CollectionView.extend({
         }
     },
 
+    render: function() {
+        CollectionView.prototype.render.call(this);
+        this.addEmptyOption();
+    },
+
     callChangeFunction: function(event) {
         this.changeFunction(this.getValue());
     }
