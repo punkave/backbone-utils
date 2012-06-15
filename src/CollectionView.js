@@ -4,6 +4,8 @@ var CollectionView = Backbone.View.extend({
 
         this.parseOptions(options);
         this.bindEvents(options);
+
+        this.addAll(this.collection, {})
     },
 
     // This is a handy function for debugging.
