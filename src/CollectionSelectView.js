@@ -42,6 +42,8 @@ var CollectionSelectView = CollectionView.extend({
     render: function() {
         CollectionView.prototype.render.call(this);
         this.addEmptyOption();
+
+        return this;
     },
 
     callChangeFunction: function(event) {
