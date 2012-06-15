@@ -21,19 +21,22 @@ var CollectionSelectView = CollectionView.extend({
         return this.$el.val();
     },
 
-    render: function() {
-        CollectionView.prototype.render.call(this);
+    addAll: function(collection, options) {
+        CollectionView.prototype.addAll.call(this, collection, options);
+        this.addEmptyOption();
+    },
 
+    addEmptyOption: function() {
         if (this.addEmpty) {
-            var idAttribute = this.collection.model.idAttribute || "id";
-            var attrs = {
-                selected: true
-            };
-            attrs[idAttribute] = "";
-            this.collection.add([attrs], { at: 0 });
-        }
+            var $option = $('<option />');
+            
+            this.$('option').each(function() {
+                $(this).prop('selected', false);
+            });
 
-        return this;
+            $option.prop('selected', true);
+            this.$el.prepend($option);
+        }
     },
 
     callChangeFunction: function(event) {
