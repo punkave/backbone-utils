@@ -5,7 +5,9 @@ var CollectionItemView = Backbone.View.extend({
     },
 
     log: function(text) {
-        console.log(this.label + " - " + text);
+        if (console && console.log) {
+            console.log(this.label + " - " + text);
+        }
     },
 
     // This is a default inline template that simply lists all keys and values for the model

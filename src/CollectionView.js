@@ -10,7 +10,9 @@ var CollectionView = Backbone.View.extend({
 
     // This is a handy function for debugging.
     log: function(text) {
-        console.log(this.label + " - " + text);
+        if (console && console.log) {
+            console.log(this.label + " - " + text);
+        }
     },
 
     // The default collectionFilter should simply return true. This will gaurantee that
