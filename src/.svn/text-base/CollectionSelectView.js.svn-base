@@ -29,8 +29,6 @@ var CollectionSelectView = CollectionView.extend({
     addEmptyOption: function() {
         if (this.addEmpty) {
             var $option = $('<option />');
-            $option.html(this.addEmpty);
-            $option.val('');
             
             this.$('option').each(function() {
                 $(this).prop('selected', false);
