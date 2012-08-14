@@ -65,6 +65,13 @@ var CollectionView = Backbone.View.extend({
         }));
     },
 
+    // Gets a subview associated with an item
+    getSubView: function(item) {
+        return _.find(this.subViews, function(view) {
+            return view.model.cid == item.cid;
+        });
+    },
+
     // When a model is simply added to the collection, we only want to render one
     // sub view. We also maintain an ordering for subviews so we can put their
     // els in the right spot. This is more efficient then rendering the entire
@@ -115,7 +122,7 @@ var CollectionView = Backbone.View.extend({
 
         var self = this;
         this.collection.chain().filter(this.collectionFilter).each(function(item, index) {
-            self.$el.append(self.subViews[index].render().$el);
+            self.$el.append(self.getSubView(item).render().$el);
         }, this);
 
         return this;
