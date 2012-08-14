@@ -5,7 +5,7 @@ var CollectionView = Backbone.View.extend({
         this.parseOptions(options);
         this.bindEvents(options);
 
-        this.addAll(this.collection, {})
+        this.addAll(this.collection, {});
     },
 
     // This is a handy function for debugging.
@@ -86,7 +86,7 @@ var CollectionView = Backbone.View.extend({
         }
     },
 
-    // This creates all of the subviews for the collection. This will get called 
+    // This creates all of the subviews for the collection. This will get called
     // on collection reset. This function will render the views.
     addAll: function(collection, options) {
         this.$el.empty();
