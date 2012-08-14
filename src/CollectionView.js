@@ -115,7 +115,7 @@ var CollectionView = Backbone.View.extend({
 
         var self = this;
         this.collection.chain().filter(this.collectionFilter).each(function(item, index) {
-            self.$el.append(self.subViews[index].$el);
+            self.$el.append(self.subViews[index].render().$el);
         }, this);
 
         return this;
