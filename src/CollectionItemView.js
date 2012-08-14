@@ -37,6 +37,8 @@ var CollectionItemView = Backbone.View.extend({
             this.$el.html(this.template({ data: this.model.toJSON() }));
             this.needsRender = false;
         }
+
+        this.delegateEvents(this.events);
         return this;
     }
 });
