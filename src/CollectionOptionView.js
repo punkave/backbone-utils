@@ -20,6 +20,6 @@ var CollectionOptionView = CollectionItemView.extend({
         this.$el.prop('selected', this.model.get('selected'));
         
         return this;
-    },
+    }
 
 });
