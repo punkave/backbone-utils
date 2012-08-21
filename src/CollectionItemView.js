@@ -2,7 +2,6 @@ var CollectionItemView = Backbone.View.extend({
     initialize: function(options) {
         this.parseOptions(options);
         this.bindEvents(options);
-        this.needsRender = true;
     },
 
     log: function(text) {
@@ -27,16 +26,12 @@ var CollectionItemView = Backbone.View.extend({
     // Re-render every time the model changes
     bindEvents: function(options) {
         this.model.bind("change", function() {
-            this.needsRender = true;
             this.render();
         }, this);
     },
 
     render: function() {
-        if (this.needsRender) {
-            this.$el.html(this.template({ data: this.model.toJSON() }));
-            this.needsRender = false;
-        }
+        this.$el.html(this.template({ data: this.model.toJSON() }));
 
         this.delegateEvents(this.events);
         return this;
